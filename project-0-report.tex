@@ -1,0 +1,128 @@
+\documentclass[12pt,letterpaper]{ntdhw}
+
+
+
+\title{Project 0: Functional Programming and Lisp Introduction}
+\author{CSCI 561}
+
+\rhead{Names:}
+
+%\keytrue
+
+\begin{document}
+\pagestyle{fancyplain}
+
+\maketitle
+\thispagestyle{fancyplain}
+%\clearpage
+
+\begin{enumerate}
+
+  \item What are the result types of the following Lisp expressions?
+  \begin{enumerate}
+    \item {\tt 1} : \emph{
+      % Your Answer Here
+    }
+    \item {\tt (+ 1 2)} : \emph{
+      % Your Answer Here
+    }
+    \item {\tt '(+ 1 2)} : \emph{
+      % Your Answer Here
+    }
+    \item {\tt (eval '(+ 1 2))} : \emph{
+      % Your Answer Here
+    }
+    \item {\tt (lambda () (+ 1 2))} : \emph{
+      % Your Answer Here
+    }
+    \item {\tt "foo"} : \emph{
+      % Your Answer Here
+    }
+    \item {\tt 'bar} : \emph{
+      % Your Answer Here
+    }
+  \end{enumerate}
+
+  \item Tail Calls:
+  \begin{enumerate}
+    \item What is tail recursion?
+
+    \begin{emph}
+      Answer: % Your Answer Here
+    \end{emph}
+
+    \item In the recursive implementation, will {\tt fold-left} or
+    {\tt fold-right} be more memory-efficient?  Why?
+
+    \begin{emph}
+      Answer: % Your Answer Here
+    \end{emph}
+  \end{enumerate}
+
+  \item Lisp and Python represent code differently.
+
+  \begin{enumerate}
+    \item Contrast the representations of Lisp code and Python code.
+
+    \begin{emph}
+      Answer: % Your Answer Here
+    \end{emph}
+
+    \item How do Python's {\tt eval()} and {\tt exec()} differ from
+    the approach of Lisp?
+
+    \begin{emph}
+      Answer: % Your Answer Here
+    \end{emph}
+  \end{enumerate}
+
+  \item GCC supports an extension to the C language that allows
+  local/nested functions (functions contained in other functions).  A
+  GCC local function can access local variables from its parent
+  function.
+  \begin{enumerate}
+    \item What problems could arise if you return a function pointer
+    to a GCC local function? \emph{(Hint: ``Funarg problem'')}
+
+    \begin{emph}
+      Answer: % Your Answer Here
+    \end{emph}
+
+    \item How does Lisp handle this problem?
+
+    \begin{emph}
+      Answer: % Your Answer Here
+    \end{emph}
+
+  \end{enumerate}
+
+
+  \item Test the performance of your implementation of
+    \texttt{merge-sort}.
+    \begin{enumerate}
+    \item Plot the running time of your \texttt{merge-sort}
+      implementation for increasing input sizes.  Include enough data
+      points to demonstrate the empirical asymptotic running time.
+
+    \begin{emph}
+      Answer: % Your Answer Here
+    \end{emph}
+
+    \item What asymptotic running time did you expect for
+      \texttt{merge-sort}, and what running time did you observe?
+      Explain any differences.
+
+    \begin{emph}
+      Answer: % Your Answer Here
+    \end{emph}
+
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

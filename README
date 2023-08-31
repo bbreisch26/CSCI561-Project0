@@ -1,0 +1,194 @@
+CSCI 561 --- Project 0
+
+The purpose of the project is to familiarize you with functional
+programming and the Common Lisp development environment.
+
+Please take the time to setup the lisp development environment
+(explained below). IF YOU DO NOT SETUP A REASONABLE DEVELOPMENT
+ENVIRONMENT, THE OTHER COURSE PROJECTS WILL BE *EXTREMELY* DIFFICULT.
+
+INSTRUCTIONS
+============
+
+1. Form groups of 2-4 to work on this project.
+
+2. From the github.com interface for this repo, click `Use this
+   template` to import the starter code.  Create a new, private repo
+   for your team in the course organization.  Name your repo
+   `TYY-project-0-TEAMNAME`, where,
+   - `T` is one charcter for the term: `f` Fall or `s` for Spring,
+   - `YY` is the two digit year, e.g. `19` for 2019,
+   - `TEAMNAME` is a name for your team.
+
+3. Clone the repo.
+
+        git clone git@github.com:mines-csci561/TYY-project-0-TEAMNAME
+
+4. Give all team members access to the team repo in the course github
+   organization.
+
+5. Add all team members' names and CWIDs to the `AUTHORS` file.
+
+6. Double-check that (1) your team's github repo is correctly named
+   and (2) only your teammates (and the instructor/TA) can access your
+   team's github repo.
+
+7. Complete the function stubs in project-0.lisp.
+
+   Use only the following standard Lisp functions, macros, operators,
+   and constants in your definitions, along with any previously
+   completed functions in this project:
+
+    - T
+    - NIL
+    - IF
+    - WHEN
+    - COND
+    - NOT
+    - AND
+    - OR
+    - EQUAL
+    - CONS
+    - LIST
+    - CAR
+    - CDR
+    - FIRST
+    - SECOND
+    - THIRD
+    - LENGTH
+    - DEFUN
+    - LABELS
+    - LET
+    - LET*
+    - FUNCALL
+    - CASE
+    - DESTRUCTURING-BIND
+    - QUOTE (')
+    - ` (backquote / list template)
+    - any arithmetic operator or relation (+, -, *, /, <, <=, >, >=, =)
+    - any numerical constant
+
+8. Answer the questions in project-0-report.pdf
+
+9.  Push your code changes to your group repo in the course
+    organization before the project deadline.  At the project
+    deadline, the TA/instructor will download for grading all
+    repositories in the course organization beginning with the prefix
+    `TYY-project-0-` as described above
+
+10. Submit your report as a PDF on canvas. Include all group members'
+    names in the submitted PDF (only one group member needs to
+    submit).
+
+LISP ENVIRONMENT SETUP
+======================
+
+I strongly recommend that you use SBCL (http://sbcl.org/) and
+Emacs/SLIME (https://common-lisp.net/project/slime/) on Linux.
+
+If you are not using Linux as the host operating system on your
+computer, you may install Linux in a virtual machine (VM).
+
+You may also use the Isengard server (isengard.mines.edu) and the
+Linux workstations in the ALAMODE lab in CT B60.
+
+SBCL Setup
+----------
+SBCL (Steel Bank Common Lisp) is high performance Common Lisp system,
+which should already installed on Isengard and the ALAMODE
+workstations.
+
+If you are running Debian/Ubuntu on your own system, you can install
+SBCL from the package manager:
+
+    sudo apt-get install sbcl
+
+SBCL is also available for many other platforms:
+http://sbcl.org/platform-table.html
+
+Quicklisp/SLIME
+---------------
+
+Quicklisp is a lisp package manager.
+
+SLIME (the "Superior Lisp Interaction Mode for Emacs") provides a
+development environment for Common Lisp within Emacs.
+
+    wget https://beta.quicklisp.org/quicklisp.lisp
+    sbcl --load quicklisp.lisp \
+         --eval '(quicklisp-quickstart:install)' \
+         --eval '(ql-util:without-prompting (ql:add-to-init-file))' \
+         --eval '(ql:quickload "quicklisp-slime-helper")' \
+         --eval '(quit)'
+
+The above call to SBCL will print several commands at the end to add
+to your `~/.emacs` file.  Add these commands to your `~/.emacs` file.
+
+Finally, to improve security, set a password for slime connections:
+
+    (umask 077 && openssl rand -base64 14 > ~/.slime-secret)
+
+
+Emacs Setup
+-----------
+
+See the `example.emacs` file in this repository for some useful
+configuration options that you may add to your `~/.emacs`.
+
+Submission Instructions
+=======================
+
+These submission instructions are intended to promote collaboration
+with your teammates, make submitting your code easy, and avoid errors
+with incorrect submissions.  Please take care to correctly submit your
+work by the deadline.
+
+- Push all changes to your team repo created above in the course
+  organization before the deadline.
+
+- The TA/instructor will clone the user repos (based on the repository
+  name prefix) at the deadline and grade the code in the master
+  branch.
+
+- ONLY CODE THAT IS CORRECTLY SUBMITTED BY THE DEADLINE WILL BE
+  GRADED:
+  - Ensure that your code is pushed to a correctly named repo in the
+    course organization.  Incorrectly named repos will not be graded.
+  - Ensure that your code is in the master branch.  Code in other
+    branches will not be graded.
+  - Submit your code by the deadline.  Late work will not be graded.
+  - Keep the same directory structure and function names as in the
+    stater code.  The grading scripts will test your code based on the
+    directory structure and function names in the starter code.  If
+    you change either, your code will not pass the tests, and you will
+    not receive credit.
+  - Code that does not compile will not receive credit.
+
+Grading
+=======
+
+Your code will be run for grading using (approximately) the following
+procedure:
+
+    sbcl --load project-0.lisp --load testcases.lisp
+
+Your code needs to produce the correct result to receive credit for
+each testcase. Make sure your code loads cleanly without compilation
+errors, extra I/O, or other side effects.
+
+FAQ
+===
+
+Q: I want to do the project under MacOS X.  What should I do?
+
+A: The above instructions for SLIME under Linux should mostly work for
+   MacOS X as well.  You may find one of the MacOS X package managers,
+   such as Homebrew or MacPorts, to be convenient for installing SBCL
+   and Emacs.
+
+Q: I want to do the project under MS Windows.  What should I do?
+
+A: The instructor and TAs cannot provide support for development on MS
+   Windows. Given the advantages and prevalance of Linux in servers,
+   the cloud, embedded, mobile, robotics, and supercomputing, it would
+   be to your distinct benefit to become comfortable using Linux.
