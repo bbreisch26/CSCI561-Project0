@@ -52,7 +52,8 @@
 ;;  (boolean-implies t nil) => nil
 ;;  (boolean-implies nil nil) => t
 (defun boolean-implies (a b)
-  (TODO 'boolean-implies))
+  (or (not(boolean-eval(a)))
+      (boolean eval(b))))
 
 ;; Return the bi-implication (if and only if) of a and b
 ;;
@@ -82,7 +83,9 @@
 ;; Examples:
 ;;   (fold-left #'- 1 '(2 3)) => -4
 (defun fold-left (function initial-value list)
-  (TODO 'fold-left))
+  (if (null list)
+      initial-value
+      (fold-left function (funcall function initial-value (car list)) (cdr list))))
 
 
 ;; Perform the right fold on the list
@@ -90,7 +93,9 @@
 ;; Examples:
 ;;   (fold-right #'- 1 '(2 3)) => 0
 (defun fold-right (function initial-value list)
-  (TODO 'fold-right))
+  (if (null list)
+      initial-value
+      (funcall function (car list) (fold-right function initial-value (cdr list)))))
 
 ;; Perform merge sort on the lists.
 ;;
