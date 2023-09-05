@@ -106,8 +106,8 @@
 ;;  (boolean-implies t nil) => nil
 ;;  (boolean-implies nil nil) => t
 (defun boolean-implies (a b)
-  (or (not(boolean-eval(a)))
-      (boolean eval(b))))
+  (or (not (funcall boolean-eval a))
+      (funcall boolean-eval b)))
 
 ;; Return the bi-implication (if and only if) of a and b
 ;;
@@ -115,7 +115,10 @@
 ;;  (boolean-iff t nil) => nil
 ;;  (boolean-iff nil nil) => t
 (defun boolean-iff (a b)
-  (TODO 'boolean-iff))
+  (or (and (funcall boolean-eval a)
+	   (funcall boolean-eval b))
+      (and (not (funcall boolean-eval a))
+	   (not (funcall boolean-eval b)))))
 
 ;; Evaluate a boolean expression.
 ;; Handle NOT, AND, OR, XOR, IMPLIES, and IFF.
