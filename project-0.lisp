@@ -9,7 +9,10 @@
 ;;  (set-member '(1 2) 1) => T
 ;;  (set-member '(1 2) 3) =>  NIL
 (defun set-member (set item)
-  (TODO 'set-member))
+  (if (= (car set) (item))
+    (T)
+    (set-member (cdr set) (item))
+  ))
 
 ;; Return the union of set-1 and set-2.
 ;; The result should contain no duplicates.
@@ -18,7 +21,17 @@
 ;; Examples:
 ;;   (set-union '(1 2) '(2 4)) => '(1 2 4)
 (defun set-union (set-1 set-2)
-  (TODO 'set-union))
+  (if (null set-1)
+    set-2
+    (let ((head (car set-1)))
+      (set-union (cdr set-1)  (if (set-member set-2 head)
+        set-2
+        (cons head set-2)
+      ))
+    )
+    
+  )
+)
 
 ;; Return the intersection of set-1 and set-2.
 ;; The result should contain no duplicates.
@@ -27,7 +40,26 @@
 ;; Examples:
 ;;   (set-intersection '(1 2) '(2 4)) => '(2)
 (defun set-intersection (set-1 set-2)
-  (TODO 'set-intersection))
+  (if (null set-2) 
+    nil
+    (labels
+      ((set-intersection-inner (set-1 set-2 out)
+        (if (null set-1)
+          out
+          (set-intersection-inner (cdr set-1) set-2 
+            (let ((head (car set-1)))
+              (if (set-member set-2 head)
+                (cons head out)
+                out
+              )
+            )
+          )
+        )
+      ))
+      (set-intersection-inner set-1 set-2 nil)
+    )
+  )
+)
 
 ;; Return the difference of set-1 and set-2.
 ;; The result should contain no duplicates.
@@ -36,7 +68,26 @@
 ;; Examples:
 ;;   (set-diff '(1 2) '(2 4)) => '(1)
 (defun set-diff (set-1 set-2)
-  (TODO 'set-diff))
+  (if (null set-2)
+    nil
+    (labels
+      ((set-difference-inner (set-1 set-2 out)
+        (if (null set-1)
+          out
+          (set-difference-inner (cdr set-1) set-2 
+            (let ((head (car set-1)))
+              (if (set-member set-2 head)
+                out
+                (cons head out)
+              )
+            )
+          )
+        )
+      ))
+      (set-difference-inner set-1 set-2 nil)
+    )
+  )
+)
 
 ;; Return the exclusive or of a and b
 ;;
