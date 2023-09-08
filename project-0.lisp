@@ -98,7 +98,8 @@
 ;;  (boolean-xor t nil) => t
 ;;  (boolean-xor nil nil) => nil
 (defun boolean-xor (a b)
-  (TODO 'boolean-xor))
+  (or (and a (not b))
+       (and b (not a))))
 
 ;; Return the implication of a and b
 ;;
