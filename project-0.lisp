@@ -9,7 +9,7 @@
 ;;  (set-member '(1 2) 1) => T
 ;;  (set-member '(1 2) 3) =>  NIL
 (defun set-member (set item)
-  (if (null set)
+  (if (eq set nil)
     nil
     (if (= (car set) item)
       T
@@ -25,7 +25,7 @@
 ;; Examples:
 ;;   (set-union '(1 2) '(2 4)) => '(1 2 4)
 (defun set-union (set-1 set-2)
-  (if (null set-1)
+  (if (eq set-1 nil)
     set-2
     (let ((head (car set-1)))
       (set-union (cdr set-1)  (if (set-member set-2 head)
@@ -43,11 +43,11 @@
 ;; Examples:
 ;;   (set-intersection '(1 2) '(2 4)) => '(2)
 (defun set-intersection (set-1 set-2)
-  (if (null set-2) 
+  (if (eq set-2 nil) 
     nil
     (labels
       ((set-intersection-inner (set-1 set-2 out)
-        (if (null set-1)
+        (if (eq set-1 nil)
           out
           (set-intersection-inner (cdr set-1) set-2 
             (let ((head (car set-1)))
@@ -71,11 +71,11 @@
 ;; Examples:
 ;;   (set-diff '(1 2) '(2 4)) => '(1)
 (defun set-diff (set-1 set-2)
-  (if (null set-2)
+  (if (eq set-2 nil)
     nil
     (labels
       ((set-difference-inner (set-1 set-2 out)
-        (if (null set-1)
+        (if (eq set-1 nil)
           out
           (set-difference-inner (cdr set-1) set-2 
             (let ((head (car set-1)))
@@ -140,7 +140,7 @@
 ;; Examples:
 ;;   (fold-left #'- 1 '(2 3)) => -4
 (defun fold-left (function initial-value list)
-  (if (null list)
+  (if (eq list nil)
       initial-value
       (fold-left function (funcall function initial-value (car list)) (cdr list))))
 
@@ -150,7 +150,7 @@
 ;; Examples:
 ;;   (fold-right #'- 1 '(2 3)) => 0
 (defun fold-right (function initial-value list)
-  (if (null list)
+  (if (eq list nil)
       initial-value
       (funcall function (car list) (fold-right function initial-value (cdr list)))))
 
