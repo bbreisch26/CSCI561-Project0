@@ -163,4 +163,45 @@
 ;; Examples:
 ;;     (merge-sort '(2 1 5 0) #'<) => '(0 1 2 5)
 (defun merge-sort (list predicate)
-  (TODO 'merge-sort))
+  (cond
+    ;; Edge cases - return nil when input is nil
+    ((eq list nil) nil)
+    ;; List of length 1 is already sorted
+    ((eq (length list) 1) list)
+    ;;Otherwise split into two halves
+    (t
+     (let* ((splitted (merge-split list))
+	    (sorted1 (merge-sort (first splitted) predicate))
+	    (sorted2 (merge-sort (second splitted) predicate)))
+       (merge-list sorted1 sorted2 predicate))))
+  
+  )
+
+;;Helper function to split list
+;; Parameters: list -> list to split into two parts
+;; Returns two sub lists '((half1) (half2))
+;; Splits list based on odd/even ordering in order to avoid needing the length of list
+(defun merge-split (list)
+  (if (equal list nil)
+      (list)
+      (let ((split (merge-split (cdr list))))
+	(list (cons (car list) (second split)) (first split))))
+
+  )
+
+;;Helper function to merge two lists based on predicate
+(defun merge-list (list1 list2 predicate)
+  (cond
+    ;;Edge cases - either both or a single list is empty
+    ((and (eq list1 nil) (eq list2 nil)) nil)
+    ((eq list1 nil) list2)
+    ((eq list2 nil) list1)
+    ;; Use predicate to evaluate where to sort list
+    ;; Assuming binary-output operator (> and <= cover all cases)
+    ((funcall
+      predicate (car list1) (car list2))
+     (cons (car list1) (merge-list (cdr list1) list2 predicate)))
+    ;; ! list1[0] predicate list2[0]
+    (t (cons (car list2) (merge-list list1 (cdr list2) predicate))))
+  )
+
