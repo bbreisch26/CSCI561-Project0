@@ -180,14 +180,18 @@
 ;;Helper function to split list
 ;; Parameters: list -> list to split into two parts
 ;; Returns two sub lists '((half1) (half2))
-;; Splits list based on odd/even ordering in order to avoid needing the length of list
+;; Splits list based on index, but required a fold-left in order to reverse the first half
 (defun merge-split (list)
-  (if (equal list nil)
-      (list)
-      (let ((split (merge-split (cdr list))))
-	(list (cons (car list) (second split)) (first split))))
 
-  )
+  ;; n used to accumulate difference in length between list and accum
+  (labels ((half (list n half1 half2)
+	     (cond
+	       ((<= (- n (length half1)) 1)
+		;; Have to reverse half1 using fold-left
+		(list (fold-left (lambda (x y) (cons y x)) nil half1) half2))
+	       (t
+		(half (cdr list) (- n 1) (cons (car list) half1) (cdr list))))))
+    (half list (length list)  '() '())))
 
 ;;Helper function to merge two lists based on predicate
 (defun merge-list (list1 list2 predicate)
