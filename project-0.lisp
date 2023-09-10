@@ -154,29 +154,6 @@
       initial-value
       (funcall function (car list) (fold-right function initial-value (cdr list)))))
 
-;; Perform merge sort on the lists.
-;;
-;; Parameters:
-;;   list: The list to sort
-;;   predicate: A function to compare elements of the list
-;;
-;; Examples:
-;;     (merge-sort '(2 1 5 0) #'<) => '(0 1 2 5)
-(defun merge-sort (list predicate)
-  (cond
-    ;; Edge cases - return nil when input is nil
-    ((eq list nil) nil)
-    ;; List of length 1 is already sorted
-    ((eq (length list) 1) list)
-    ;;Otherwise split into two halves
-    (t
-     (let* ((splitted (merge-split list))
-	    (sorted1 (merge-sort (first splitted) predicate))
-	    (sorted2 (merge-sort (second splitted) predicate)))
-       (merge-list sorted1 sorted2 predicate))))
-  
-  )
-
 ;;Helper function to split list
 ;; Parameters: list -> list to split into two parts
 ;; Returns two sub lists '((half1) (half2))
@@ -208,4 +185,29 @@
     ;; ! list1[0] predicate list2[0]
     (t (cons (car list2) (merge-list list1 (cdr list2) predicate))))
   )
+
+
+;; Perform merge sort on the lists.
+;;
+;; Parameters:
+;;   list: The list to sort
+;;   predicate: A function to compare elements of the list
+;;
+;; Examples:
+;;     (merge-sort '(2 1 5 0) #'<) => '(0 1 2 5)
+(defun merge-sort (list predicate)
+  (cond
+    ;; Edge cases - return nil when input is nil
+    ((eq list nil) nil)
+    ;; List of length 1 is already sorted
+    ((eq (length list) 1) list)
+    ;;Otherwise split into two halves
+    (t
+     (let* ((splitted (merge-split list))
+	    (sorted1 (merge-sort (first splitted) predicate))
+	    (sorted2 (merge-sort (second splitted) predicate)))
+       (merge-list sorted1 sorted2 predicate))))
+  
+  )
+
 
