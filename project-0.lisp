@@ -99,7 +99,7 @@
 ;;  (boolean-xor nil nil) => nil
 (defun boolean-xor (a b)
   (or (and a (not b))
-       (and b (not a))))
+      (and b (not a))))
 
 ;; Return the implication of a and b
 ;;
@@ -128,12 +128,61 @@
 ;;  (boolean-eval '(and t (or nil t)) => t
 (defun boolean-eval (exp)
   (cond
+    ;; Base cases
     ((equal t exp) t)
+    ((equal nil exp) nil)
+    ;; NOT
     ((equal 'not (car exp))
-     (TODO 'boolean-eval-not))
-    ;; TODO: Handle other possible cases
-    (t
-     (TODO 'boolean-eval))))
+     (not (boolean-eval (car (cdr exp)))))
+    ;; AND
+    ((equal 'and (car exp))
+     (let ((inputs (cdr exp)))
+       (if (null inputs) t
+	   (cond
+	     ;; Check if boolean expression has than 2 arguments
+	     (( = (length inputs) 2)
+	      (and (boolean-eval (car inputs))                                                                       
+		   (boolean-eval (car (cdr inputs)))))
+	     ;; Check if boolean expression has more than 2 arguments, if so recursively call boolean-eval 
+	     (( > (length inputs) 2)
+	      (and (boolean-eval (car inputs))
+	           (boolean-eval `(and ,@(cdr inputs)))))))))
+    ;; OR
+    ((equal 'or (car exp))
+     (let ((inputs (cdr exp)))
+       (if (null inputs) nil
+	   (cond
+	     ;; Check if boolean expression has 2 arguments
+	     (( = (length inputs) 2)
+	      (or (boolean-eval (car inputs))
+	          (boolean-eval (car (cdr inputs)))))
+	     ;; Check if boolean expression has more than 2 arguments, if so recursively call boolean-eval
+             (( > (length inputs) 2)
+	      (or (boolean-eval (car inputs))
+		  (boolean-eval `(or ,@(cdr inputs)))))))))
+    ;; XOR
+    ((equal 'xor (car exp))
+     (let ((inputs (cdr exp)))
+       (if (null inputs) nil
+	   ;; Boolean expression for XOR
+	   (or (and (boolean-eval (car inputs)) (not (boolean-eval (car (cdr inputs)))))
+	       (and (boolean-eval (car (cdr inputs))) (not (boolean-eval (car inputs))))))))
+    ;; IMPLIES
+    ((equal 'implies (car exp))
+     (let ((inputs (cdr exp)))
+       (if (null inputs) t
+	   ;; Boolean expression for IMPLIES
+	   (or (not (boolean-eval (car inputs)))
+	       (boolean-eval (car (cdr inputs)))))))
+    ;; IFF
+    ((equal 'iff (car exp))
+     (let ((inputs (cdr exp)))
+       (if (null inputs) t
+	   ;; Check if arguments are equal, this is an easier way then typing the full boolean expression
+	   (equal (boolean-eval (car inputs))
+		  (boolean-eval (car (cdr inputs)))))))
+    )
+)
 
 ;; Perform the left fold on the list
 ;;
