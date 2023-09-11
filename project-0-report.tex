@@ -1,12 +1,15 @@
 
 \documentclass[12pt,letterpaper]{ntdhw}
 
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
 
 
 \title{Project 0: Functional Programming and Lisp Introduction}
 \author{CSCI 561}
 
-\rhead{Names:}
+\rhead{Names: Luke Beukelman, Ben Breisch, Luc Lafave, Adam Thistlewood}
 
 %\keytrue
 
@@ -106,7 +109,10 @@
       points to demonstrate the empirical asymptotic running time.
 
     \begin{emph}
-      Answer: % Your Answer Here
+      Answer: % Your Answer Here 
+      \break \includegraphics{merge} \break
+      The graph above shows the average of 5 runs of merge-sort for an increasing value of n. Values within a test list of length n were generated using Common Lisp's \(RANDOM\) function. The graph also shows a theoretical \(n*log(n)\) on a secondary axis.
+      
     \end{emph}
 
     \item What asymptotic running time did you expect for
@@ -115,6 +121,7 @@
 
     \begin{emph}
       Answer: % Your Answer Here
+      Merge-sort has an average runtime complexity of \(\theta (n*log(n))\). As you can see in the graph above, the runtime of our algorithm very nearly matches the theoretical complexity of the algorithm. Some explanations for the small amount of error include CPU clock speed variations, scheduling discrepancies, as well as competing processes. All development and testing was done on Isengard, a shared server that has many users.
     \end{emph}
 
     \end{enumerate}
