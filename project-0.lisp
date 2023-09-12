@@ -137,6 +137,7 @@
     ;; AND
     ((equal 'and (car exp))
      (let ((inputs (cdr exp)))
+       ;; Check if input is null
        (if (null inputs) t
 	   (cond
 	     ;; Check if boolean expression has than 2 arguments
@@ -150,6 +151,7 @@
     ;; OR
     ((equal 'or (car exp))
      (let ((inputs (cdr exp)))
+       ;; Check if input is null
        (if (null inputs) nil
 	   (cond
 	     ;; Check if boolean expression has 2 arguments
@@ -163,6 +165,7 @@
     ;; XOR
     ((equal 'xor (car exp))
      (let ((inputs (cdr exp)))
+       ;; Check if input is null
        (if (null inputs) nil
 	   ;; Boolean expression for XOR
 	   (or (and (boolean-eval (car inputs)) (not (boolean-eval (car (cdr inputs)))))
@@ -170,6 +173,7 @@
     ;; IMPLIES
     ((equal 'implies (car exp))
      (let ((inputs (cdr exp)))
+       ;; Check if input is null
        (if (null inputs) t
 	   ;; Boolean expression for IMPLIES
 	   (or (not (boolean-eval (car inputs)))
@@ -177,6 +181,7 @@
     ;; IFF
     ((equal 'iff (car exp))
      (let ((inputs (cdr exp)))
+       ;; Check if input is null 
        (if (null inputs) t
 	   ;; Check if arguments are equal, this is an easier way then typing the full boolean expression
 	   (equal (boolean-eval (car inputs))
