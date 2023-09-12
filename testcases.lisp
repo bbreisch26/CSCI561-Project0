@@ -100,9 +100,9 @@
 
 (print "--- Running test case for fold-right ---")
 (print "(fold-right #'- 1 '(2 3)) => 0")
-(print (fold-left #'- 1 '(2 3)))
+(print (fold-right #'- 1 '(2 3)))
 (print "------------------------------------------------------------------------------")
 
 (print "--- Running test case for merge-sort ---")
 (print "(merge-sort '(2 1 5 0) #'<) => '(0 1 2 5)")
-(print (merge-sort '(2 1 5 0) #'<)
+(print (merge-sort '(2 1 5 0) #'<))
