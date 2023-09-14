@@ -53,13 +53,16 @@
 
     \begin{emph}
       Answer: Tail recursion occurs when the recursive call is the last operation of a function.
+      In tail recursion, rather than creating a new stack frame, the compiler may optimize the code
+      so that the current stack frame is replaced, resulting in fewer memory allocations and faster
+      performance.
     \end{emph}
 
     \item In the recursive implementation, will {\tt fold-left} or
     {\tt fold-right} be more memory-efficient?  Why?
 
     \begin{emph}
-      Answer: Fold-left will be more memory efficient because fold-right uses a large function call stack while fold-left processes on the go.
+      Answer: Fold-left will be more memory efficient because it is tail recursive, and fold-right uses a large function call stack while fold-left processes on the go.
     \end{emph}
   \end{enumerate}
 
@@ -96,12 +99,17 @@
 
     \begin{emph}
       Answer: % Your Answer Here
+      GCC languages are compiled and don't have managed environments, so a function passed by pointer
+      would not be able to access local variables, as it would be compiled irrelevant of the
+      scope/environment in which the local variables are declared. 
+
     \end{emph}
 
     \item How does Lisp handle this problem?
 
     \begin{emph}
-      Answer: % Your Answer Here
+      Answer: Lisp, having a runtime and treating functions as first-class objects, can create
+      a complexity of the lexical environment and provide it for the function to run.
     \end{emph}
 
   \end{enumerate}
@@ -117,7 +125,9 @@
     \begin{emph}
       Answer: % Your Answer Here 
       \break \includegraphics{merge} \break
-      The graph above shows the average of 5 runs of merge-sort for an increasing value of n. Values within a test list of length n were generated using Common Lisp's \(RANDOM\) function. The graph also shows a theoretical \(n*log(n)\) on a secondary axis.
+      The graph above shows the average of 5 runs of merge-sort for an increasing value of n,
+      on a processor clocked at 2.2 Ghz. Values within a test list of length n were generated using
+      Common Lisp's \(RANDOM\) function. The graph also shows a theoretical \(n*log(n)\) on a secondary axis.
       
     \end{emph}
 
